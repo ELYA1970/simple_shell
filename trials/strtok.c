@@ -1,11 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <fcntl.h>
-#include <errno.h>
+#include "main.h"
 /****/
 
 int _strlen(char *str)
@@ -18,21 +11,41 @@ int _strlen(char *str)
     }
     return(count);
 }
-
-char *Arr_token(char *str)
+int count_tokens(char *str, const char *delim)
 {
-    char *token;
-    char *Arr_tokens;
-    int i = 0, j = 0;
-
-    Arr_tokens = malloc(_strlen(str) * sizeof(char *));
-    token = strtok(str, " \\\t\n,;.");
-while(token != NULL)
-{
-Arr_tokens[i] = *token;
-i++;
-token = strtok(NULL, " \\\t\n,;.");
+    int i = 0, j;
+    int token_num = 0;
+    
+    while (str[i])
+    {
+        for (j = 0; delim[j]; j++)
+        {
+            if (delim[j] == str[i])
+                token_num++;
+            j++;
+        }
+        i++;
+    }
+    return (token_num);
 }
-Arr_tokens[i] = NULL;
+
+char **Arr_token(char *str)
+{
+    char *token, *_str;
+    char **Arr_tokens;
+    const char *delim = " \t\n\r";
+    int token_num, i = 0;
+
+    token_num = count_tokens(str, delim);
+    _str = strdup(str);
+    Arr_tokens = malloc(token_num * sizeof(char *));
+    token = strtok(_str, delim);
+    while(token != NULL)
+    {
+        Arr_tokens[i] = malloc(sizeof(char) * _strlen(token));
+        Arr_tokens[i] = token;
+        i++;
+        token = strtok(NULL, delim);
+    }
     return (Arr_tokens);
 }
