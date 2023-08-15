@@ -21,7 +21,7 @@ int main(int c, char **argv, char **env)
             }
             buff[RD] = '\0';
             arr_str = Arr_token(buff);
-            if (execve(arr_str[0], (const char *const *)arr_str, (const char *const *)env) == -1)
+            if (execve(arr_str[0], arr_str, env) == -1)
                 perror(argv[0]);
 
             }

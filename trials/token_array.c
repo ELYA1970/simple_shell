@@ -1,34 +1,40 @@
 #include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <fcntl.h>
+#include <errno.h>
 /****/
-
 int _strlen(char *str)
 {
-    int count = 0, i = 0;
-    while (str[i])
-    {
-    i++;
-    count++;
-    }
-    return(count);
+	int count = 0, i = 0;
+	while (str[i])
+	{
+		i++;
+		count++;
+	}
+	return(count);
 }
 int count_tokens(char *str, const char *delim)
 {
-    int i = 0, j;
-    int token_num = 0;
-    
-    while (str[i])
-    {
-        for (j = 0; delim[j]; j++)
-        {
-            if (delim[j] == str[i])
-                token_num++;
-            j++;
-        }
-        i++;
-    }
-    return (token_num);
-}
+	int i = 0, j;
+	int token_num = 0;
 
+	while (str[i])
+	{
+		for (j = 0; delim[j]; j++)
+		{
+			if (delim[j] == str[i])
+				token_num++;
+			j++;
+		}
+		i++;
+	}
+	return (token_num);
+}
 char **Arr_token(char *str)
 {
     char *token, *_str;

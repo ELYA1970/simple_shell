@@ -9,9 +9,9 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <errno.h>
-#include <process.h>
 
 char **Arr_token(char *str);
 int _strlen(char *str);
+int count_tokens(char *str, const char *delim);
 
 #endif /*MAIN_H*/
