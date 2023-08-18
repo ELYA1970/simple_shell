@@ -24,7 +24,7 @@ int main(int c, char **argv, char **env)
 	size_t buff_size = 0;
 	ssize_t num_char;
 	char **arr;
-	int status, i = 0;
+	int status, i = 0, mode;
 	pid_t pid;
 	char *tok, *delim = {" \t\n\r"};;
 
@@ -32,14 +32,15 @@ int main(int c, char **argv, char **env)
 	(void)env;
 	(void)i;
 
+	mode = isatty(0);
 	while (1)
 	{
-		write(1, "root$ ", 6);
+		if (mode == 1)
+			write(1, "root$ ", 6);
 		num_char = getline(&buff, &buff_size, stdin);
 		if (num_char < 0)
 		{
 			errno = 0;
-			perror("Exiting the shell ...");
 			free(buff);
 			exit(errno);
 		}
