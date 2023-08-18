@@ -7,10 +7,9 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <errno.h>
-#include <process.h>
-/*
-func protos  go here
-*/
-#endif /*MAIN_H*/
 
+int _strlen(char *str);
+
+#endif /*MAIN_H*/
