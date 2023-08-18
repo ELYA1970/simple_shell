@@ -60,7 +60,6 @@ int main(int c, char **argv, char **env)
 			{
 				errno = 2;
 				perror(argv[0]);
-				printf("access\n");
 				free(arr);
 				continue;
 			}
@@ -71,7 +70,6 @@ int main(int c, char **argv, char **env)
 				{
 					errno = 2;
 					perror(argv[0]);
-					printf("execve\n");
 					free(arr);
 					exit(errno);
 				}
@@ -87,3 +85,6 @@ int main(int c, char **argv, char **env)
 	}
 	return (0);
 }
+/**
+ * 
+*/
