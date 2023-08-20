@@ -1,15 +1,16 @@
 #include "main.h"
-/**
- * _strlen: count the lenght of a given string
- * @str: string to count
- * Return: string's lenght
- */
-int _strlen(char *str)
+int main(int c, char **argv, char **env);
+/**/
+void free_arr(char **arrr)
 {
 	int i = 0;
-	while (str[i])
+
+	while (arrr[i])
+	{	
+		free(arrr[i]);
 		i++;
-	return (i);
+	}
+	free(arrr);
 }
 /**
  * main - Entry point
@@ -23,32 +24,37 @@ int main(int c, char **argv, char **env)
 	char *buff = NULL;
 	size_t buff_size = 0;
 	ssize_t num_char;
-	char **arr;
-	int status, i = 0, mode;
+	char *arr[10];
+	char *path;
+	int status, i = 0, counter = 0, mode;
 	pid_t pid;
-	char *tok, *delim = {" \t\n\r"};;
+	char *tok, *delim = {" \t\n\r"};
 
 	(void)c;
-	(void)env;
-	(void)i;
+	(void)path;
 
 	mode = isatty(0);
 	while (1)
 	{
+		counter++;
 		if (mode == 1)
 			write(1, "root$ ", 6);
 		num_char = getline(&buff, &buff_size, stdin);
 		if (num_char < 0)
 		{
 			errno = 0;
+			/*_putchar('\n');*/
 			free(buff);
 			exit(errno);
 		}
 		buff[num_char - 1] = '\0';
 		if (*buff != '\0')
 		{
-			arr = malloc(sizeof(char *) * 1024);
-			tok = strtok(buff, delim);
+			if ((tok = strtok(buff, delim)) == NULL)
+			{
+				errno = 0;
+				continue;
+			}
 			while (tok)
 			{
 				arr[i] = tok;
@@ -56,21 +62,20 @@ int main(int c, char **argv, char **env)
 				i++;
 			}
 			arr[i] = NULL;
-			if (access(arr[0], F_OK) == -1)
+			if ((path = get_cmd(arr[0])) == NULL)
 			{
 				errno = 2;
-				perror(argv[0]);
-				free(arr);
+				errmsg(argv[0], counter, arr[0]);
 				continue;
 			}
 			pid = fork();
 			if (pid == 0)
 			{
-				if (execve(arr[0], arr, env) == -1)
+				if (execve(path, arr, env) == -1)
 				{
 					errno = 2;
-					perror(argv[0]);
-					free(arr);
+					errmsg(argv[0], counter, arr[0]);
+					free(path);
 					exit(errno);
 				}
 
@@ -80,11 +85,7 @@ int main(int c, char **argv, char **env)
 				wait(&status);
 			}
 			i = 0;
-			free(arr);
 		}
 	}
 	return (0);
 }
-/**
- * 
-*/
