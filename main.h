@@ -8,22 +8,23 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <signal.h>
 #include <errno.h>
-
+/* home made functions */
 void _putchar(char c);
+char *_strtok(char *str, char *delimiter);
+int _strcspn(char *str, char *str2);
+char *_strchr(char *str, int c);
 int _strlen(char *str);
 int _strcmp(char *s1, char *s2);
+int _strncmp(char *s1, char *s2, size_t n);
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, char *src);
+char *_getenv (char *name);
 
 void errmsg(char *argv, int counter, char *arr);
 
-char *_getenv(char *name);
-
 int handle_built_ins(char *ar);
 char *get_cmd(char *command);
-
-void free_arr(char **arrr);
-
 
 #endif /*MAIN_H*/

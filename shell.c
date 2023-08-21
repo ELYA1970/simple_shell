@@ -1,17 +1,5 @@
 #include "main.h"
 int main(int c, char **argv, char **env);
-/**/
-void free_arr(char **arrr)
-{
-	int i = 0;
-
-	while (arrr[i])
-	{	
-		free(arrr[i]);
-		i++;
-	}
-	free(arrr);
-}
 /**
  * main - Entry point
  * @c: arg counter
@@ -31,26 +19,26 @@ int main(int c, char **argv, char **env)
 	char *tok, *delim = {" \t\n\r"};
 
 	(void)c;
-	(void)path;
+	(void)status;
 
 	mode = isatty(0);
 	while (1)
 	{
 		counter++;
 		if (mode == 1)
-			write(1, "root$ ", 6);
+			write(1, "$ ", 2);
 		num_char = getline(&buff, &buff_size, stdin);
 		if (num_char < 0)
 		{
 			errno = 0;
-			/*_putchar('\n');*/
+			_putchar('\n');
 			free(buff);
 			exit(errno);
 		}
 		buff[num_char - 1] = '\0';
 		if (*buff != '\0')
 		{
-			if ((tok = strtok(buff, delim)) == NULL)
+			if ((tok = _strtok(buff, delim)) == NULL)
 			{
 				errno = 0;
 				continue;
@@ -58,7 +46,7 @@ int main(int c, char **argv, char **env)
 			while (tok)
 			{
 				arr[i] = tok;
-				tok = strtok(NULL, delim);
+				tok = _strtok(NULL, delim);
 				i++;
 			}
 			arr[i] = NULL;
@@ -68,7 +56,12 @@ int main(int c, char **argv, char **env)
 				errmsg(argv[0], counter, arr[0]);
 				continue;
 			}
-			pid = fork();
+			if ((pid = fork()) < 0)
+			{
+				free(path);
+				free(buff);
+				exit (2);
+			}
 			if (pid == 0)
 			{
 				if (execve(path, arr, env) == -1)
@@ -76,14 +69,12 @@ int main(int c, char **argv, char **env)
 					errno = 2;
 					errmsg(argv[0], counter, arr[0]);
 					free(path);
+					free(buff);
 					exit(errno);
 				}
 
 			}
-			else
-			{
-				wait(&status);
-			}
+			wait(&status);
 			i = 0;
 		}
 	}
