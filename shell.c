@@ -31,7 +31,7 @@ int main(int c, char **argv, char **env)
 		if (num_char < 0)
 		{
 			errno = 0;
-			_putchar('\n');
+		/*	_putchar('\n');*/
 			free(buff);
 			exit(errno);
 		}
