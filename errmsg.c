@@ -18,8 +18,6 @@ void _putchar(char c)
 */
 void errmsg(char *argv, int counter, char *arr)
 {
-	char *str = "not found\n";
-
 	write(2, argv, _strlen(argv));
 	_putchar(':');
 	_putchar(' ');

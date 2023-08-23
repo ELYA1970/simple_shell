@@ -18,7 +18,7 @@ char *get_cmd(char *command)
 		return (path);
 	}
 	path = _getenv(pathv);
-	else if (path != NULL)
+	if (path != NULL)
 	{
 		pathcpy = strdup(path);
 		tok = _strtok(pathcpy, ":");
