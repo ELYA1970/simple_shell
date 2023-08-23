@@ -24,12 +24,13 @@ char *_getenv (char *name);
 int _isdigit_str(char *str);
 int _atoi(char *str);
 int _isdigit(char c);
+int checkmode(char *cmd);
 
 void errmsg(char *argv, int counter, char *arr);
 
 /* handle built-in commands */
 int handle_exit(char **ar);
 
-char *get_cmd(char *command);
+char *get_cmd(char *command, int mode);
 
 #endif /*MAIN_H*/
