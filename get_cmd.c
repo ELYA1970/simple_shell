@@ -34,7 +34,7 @@ char *get_cmd(char *command, int mode)
 		{
 			return (command);
 		}
-		return(NULL);
+		return (NULL);
 	}
 	else if (path != NULL)
 	{
