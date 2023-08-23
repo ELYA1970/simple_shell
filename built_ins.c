@@ -1,10 +1,26 @@
 #include "main.h"
-/***/
-int handle_built_ins(char *ar)
+/**
+ * handle_exit - build exit command
+ * @ar: array of pointers pointing to user's input
+ * Return: 0 or status if exit, -1 if no exit found
+*/
+int handle_exit(char **ar)
 {
-	char *err_str = "exit";
+	char *exit_str = "exit";
+	int status = 0;
 
-		if (ar == err_str)
+	if (_strcmp(ar[0], exit_str) == 0)
+	{
+		if (ar[1])
+		{
+			if (_isdigit_str(ar[1]))
+			{
+				status = _atoi(ar[1]);
+					return (status);
+			}
+			return (-1);
+		}
 		return (0);
-	return (1);
+	}
+	return (-1);
 }

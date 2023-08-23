@@ -9,9 +9,17 @@ void _putchar(char c)
 	write(1, &c, 1);
 
 }
+/**
+ * errmsg - display error message format
+ * @argv: argumert vector
+ * @counter: prompt counter
+ * @arr: user command
+ * Return: void.
+*/
 void errmsg(char *argv, int counter, char *arr)
 {
 	char *str = "not found\n";
+
 	write(2, argv, _strlen(argv));
 	_putchar(':');
 	_putchar(' ');
@@ -36,5 +44,5 @@ void errmsg(char *argv, int counter, char *arr)
 	_putchar(':');
 	_putchar(' ');
 	fflush(stdout);
-	write(2, str, _strlen(str));
+	write(2, "not found\n", 10);
 }

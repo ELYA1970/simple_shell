@@ -21,10 +21,15 @@ int _strncmp(char *s1, char *s2, size_t n);
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, char *src);
 char *_getenv (char *name);
+int _isdigit_str(char *str);
+int _atoi(char *str);
+int _isdigit(char c);
 
 void errmsg(char *argv, int counter, char *arr);
 
-int handle_built_ins(char *ar);
+/* handle built-in commands */
+int handle_exit(char **ar);
+
 char *get_cmd(char *command);
 
 #endif /*MAIN_H*/
