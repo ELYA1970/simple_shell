@@ -14,7 +14,7 @@ int main(int c, char **argv, char **env)
 	ssize_t num_char = 0;
 	char *arr[100];
 	char *path = NULL;
-	int status = 0, i = 0, counter = 0, mode, var = 0, abs = 0;
+	int status = 0, i = 0, counter = 0, mode, var = 0, abs = 0, stats = 0;
 	pid_t pid;
 	char *tok, *delim = {" \t\n\r"};
 
@@ -53,6 +53,16 @@ int main(int c, char **argv, char **env)
 				/*	if ((status = handle_exit(arr) >= 0))*/
 				if (_strcmp(arr[0], "exit") == 0)
 				{
+					if (arr[1])
+					{
+						stats = handle_exit(arr[1]);
+					if (stats)
+					{
+						free(buff);
+						exit(stats);
+					}
+					}
+
 					free(buff);
 					exit(status);
 				}
@@ -86,7 +96,7 @@ int main(int c, char **argv, char **env)
 				else
 				{
 					waitpid(pid, &var, 0);
-						if (WIFEXITED(status) != 0)
+					if (WIFEXITED(status) != 0)
 						status = WEXITSTATUS(var);
 					if (abs == 0)
 						free(path);

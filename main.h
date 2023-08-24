@@ -30,7 +30,7 @@ int checkmode(char *cmd);
 void errmsg(char *argv, int counter, char *arr);
 
 /* handle built-in commands */
-int handle_exit(char **ar);
+int handle_exit(char *ar);
 int handle_env(void);
 
 char *get_cmd(char *command, int mode);
