@@ -95,7 +95,7 @@ void err_exit(char *argv, int counter, char *arr, char *v)
 	write(2, arr, _strlen(arr));
 	write(2, ": ", 2);
 	fflush(stderr);
-	write(2, "Illegal number\n", 15);
+	write(2, "Illegal number", 15);
 	write(2, ": ", 2);
 	fflush(stderr);
 	write(2, v, _strlen(v));
