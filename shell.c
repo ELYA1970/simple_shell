@@ -29,7 +29,6 @@ int main(int c, char **argv, char **env)
 		num_char = getline(&buff, &buff_size, stdin);
 		if (num_char < 0)
 		{
-			errno = 0;
 			/*	_putchar('\n');*/
 			free(buff);
 			exit(status);
@@ -59,6 +58,7 @@ int main(int c, char **argv, char **env)
 				}
 				else
 				{
+					status = 127;
 					errmsg(argv[0], counter, arr[0]);
 					continue;
 				}
