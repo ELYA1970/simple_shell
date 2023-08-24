@@ -20,7 +20,7 @@ int _strcmp(char *s1, char *s2);
 int _strncmp(char *s1, char *s2, size_t n);
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, char *src);
-char *_getenv(char *name);
+char *_getenv (char *name);
 int _isdigit_str(char *str);
 int _atoi(char *str);
 int _isdigit(char c);

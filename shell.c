@@ -14,12 +14,11 @@ int main(int c, char **argv, char **env)
 	ssize_t num_char = 0;
 	char *arr[100];
 	char *path = NULL;
-	int status, i = 0, counter = 0, mode, var, abs = 0;
+	int status = 0, i = 0, counter = 0, mode, var = 0, abs = 0;
 	pid_t pid;
 	char *tok, *delim = {" \t\n\r"};
 
 	(void)c;
-	(void)var;
 	mode = isatty(0);
 	while (1)
 	{
@@ -31,9 +30,9 @@ int main(int c, char **argv, char **env)
 		if (num_char < 0)
 		{
 			errno = 0;
-		/*	_putchar('\n');*/
+			/*	_putchar('\n');*/
 			free(buff);
-			exit(var);
+			exit(status);
 		}
 		buff[num_char - 1] = '\0';
 		if (*buff != '\0')
@@ -56,7 +55,7 @@ int main(int c, char **argv, char **env)
 				if (_strcmp(arr[0], "exit") == 0)
 				{
 					free(buff);
-					exit(var);
+					exit(status);
 				}
 				else
 				{
@@ -71,19 +70,19 @@ int main(int c, char **argv, char **env)
 				{
 					free(path);
 					free(buff);
-					exit(var);
+					exit(status);
 				}
 				else if (pid == 0)
 				{
 					if (execve(path, arr, env) == -1)
 						errmsg(argv[0], counter, arr[0]);
-					exit(var);
+					exit(status);
 				}
 				else
 				{
-					wait(&status);
-					if (WIFEXITED(status) != 0)
-						var = WEXITSTATUS(status);
+					waitpid(pid, &var, 0);
+						if (WIFEXITED(status) != 0)
+						status = WEXITSTATUS(var);
 					if (abs == 0)
 						free(path);
 				}

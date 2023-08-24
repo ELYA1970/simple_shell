@@ -2,7 +2,7 @@
 /**
  * checkmode - check for absolute path
  * @cmd: taked inpute from another function
- * Return: 1 if absolute, 0 if not
+ * return: 1 if absolute, 0 if not
 */
 int checkmode(char *cmd)
 {
@@ -19,7 +19,6 @@ int checkmode(char *cmd)
 /**
  * get_cmd - get the full command
  * @command: string
- * @mode: integer
  * Return: string that are the full command.
  */
 char *get_cmd(char *command, int mode)
@@ -35,7 +34,7 @@ char *get_cmd(char *command, int mode)
 		{
 			return (command);
 		}
-		return (NULL);
+		return(NULL);
 	}
 	else if (path != NULL)
 	{
