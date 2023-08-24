@@ -3,7 +3,7 @@
  * store_digit - store a digit into a string
  * @n: taked inpute from another function
  * Return: string containing the integer
-*/
+ */
 char *store_digit(long int n)
 {
 	int i = 0, temp1 = n, temp2 = n, len = 0;
@@ -18,11 +18,11 @@ char *store_digit(long int n)
 	if (len > 1)
 	{
 		for (i = 0; i < len; i++)
-	{
-		tmp[i] = (temp2 % 10) + '0';
-		temp2 /= 10;
-	}
-	tmp[i] = '\0';
+		{
+			tmp[i] = (temp2 % 10) + '0';
+			temp2 /= 10;
+		}
+		tmp[i] = '\0';
 	}
 	else
 	{
@@ -55,7 +55,7 @@ void _putchar(char c)
  * @counter: prompt counter
  * @arr: user command
  * Return: void.
-*/
+ */
 void errmsg(char *argv, int counter, char *arr)
 {
 	char *count;
@@ -71,5 +71,33 @@ void errmsg(char *argv, int counter, char *arr)
 	write(2, ": ", 2);
 	fflush(stderr);
 	write(2, "not found\n", 10);
+	free(count);
+}
+/**
+ * err_exit - ras
+ * @argv: ras
+ * @counter: ras
+ * @arr: rrsa
+ * @v: eaf
+ * Return: vois.
+*/
+void err_exit(char *argv, int counter, char *arr, char *v)
+{
+	char *count;
+
+	count = store_digit(counter);
+	write(2, argv, _strlen(argv));
+	write(2, ": ", 2);
+	fflush(stderr);
+	write(2, count, _strlen(count));
+	write(2, ": ", 2);
+	fflush(stderr);
+	write(2, arr, _strlen(arr));
+	write(2, ": ", 2);
+	fflush(stderr);
+	write(2, "Illegal number\n", 15);
+	write(2, ": ", 2);
+	fflush(stderr);
+	write(2, v, _strlen(v));
 	free(count);
 }

@@ -55,14 +55,19 @@ int main(int c, char **argv, char **env)
 				{
 					if (arr[1])
 					{
-						stats = handle_exit(arr[1]);
-					if (stats)
+					stats = handle_exit(arr[1]);
+					if (stats >= 0)
 					{
 						free(buff);
 						exit(stats);
 					}
+					else
+					{
+						status = 2;
+						err_exit(argv[0], counter, arr[0], arr[1]);
+						continue;
 					}
-
+					}
 					free(buff);
 					exit(status);
 				}

@@ -28,6 +28,7 @@ int _isdigit(char c);
 int checkmode(char *cmd);
 
 void errmsg(char *argv, int counter, char *arr);
+void err_exit(char *argv, int counter, char *arr, char *v);
 
 /* handle built-in commands */
 int handle_exit(char *ar);

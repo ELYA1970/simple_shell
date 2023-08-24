@@ -41,9 +41,9 @@ int _atoi(char *str)
 */
 int _isdigit_str(char *str)
 {
-	int i;
+	int i = 0;
 
-	for (i = 0; i < _strlen(str); i++)
+	while (i  < _strlen(str))
 	{
 		if (!_isdigit(str[i]))
 			return (0);
