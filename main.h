@@ -10,6 +10,7 @@
 #include <sys/wait.h>
 #include <signal.h>
 #include <errno.h>
+extern char **environ;
 /* home made functions */
 void _putchar(char c);
 char *_strtok(char *str, char *delimiter);
@@ -30,6 +31,7 @@ void errmsg(char *argv, int counter, char *arr);
 
 /* handle built-in commands */
 int handle_exit(char **ar);
+int handle_env(void);
 
 char *get_cmd(char *command, int mode);
 

@@ -56,6 +56,11 @@ int main(int c, char **argv, char **env)
 					free(buff);
 					exit(status);
 				}
+				else if (_strcmp(arr[0], "env") == 0)
+				{
+					handle_env();
+					continue;
+				}
 				else
 				{
 					status = 127;
