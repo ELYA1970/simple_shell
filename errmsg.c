@@ -99,5 +99,6 @@ void err_exit(char *argv, int counter, char *arr, char *v)
 	write(2, ": ", 2);
 	fflush(stderr);
 	write(2, v, _strlen(v));
+	write(2, "\n", 1);
 	free(count);
 }
